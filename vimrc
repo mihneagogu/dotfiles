@@ -175,6 +175,7 @@ autocmd FileType javascript :colorscheme palenight
 autocmd FileType javascript :syntax on
 
 autocmd FileType rust :call GoYCM()
+autocmd FileType rust :colorscheme Atelier_DuneDark
 
 autocmd FileType html :colorscheme palenight 
 autocmd FileType html :syntax on
