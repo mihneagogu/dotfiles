@@ -1,6 +1,7 @@
 " Terminal build: Tilda terminal emulator
 " Tilda color pallete: base16:
 " Link: https://github.com/Gwyki/base16-tilda
+" Shell: zsh (oh-my-zsh with zsh-autosuggestions plugin)
 syntax on
 filetype plugin indent on
 
@@ -48,6 +49,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'alx741/vim-rustfmt'
 Plugin 'dense-analysis/ale'
 Plugin 'rust-lang/rust.vim'
 "Plugin 'jaspervdj/stylish-haskell'
@@ -81,8 +83,6 @@ colorscheme gruvbox
 syntax on
 set background=dark
 
-"let g:lightline = { 'colorscheme': 'palenight' }
-"let g:airline_theme = "palenight"
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -125,6 +125,9 @@ nnoremap <leader>] /]<ESC>
 nnoremap <leader>( /(<ESC>
 nnoremap <leader>) /)<ESC>
 
+" Open new window on right and then open a NERDTree window
+nnoremap <leader>vs :vsplit<ESC>:wincmd l<CR>:NERDTree<CR>
+
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>h :wincmd h<CR>
@@ -138,7 +141,8 @@ nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
+vnoremap <C-p> "+p<CR>
+ 
 
 fun! GoYCM()
     nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
@@ -150,6 +154,14 @@ function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+fun! RsPrintln()
+    nnoremap <buffer> <leader>p iprintln!("{}", );<ESC>
+endfun
+
+fun! RustFmt()
+    nnoremap <leader>rs :Rustfmt<ESC>
+endfun
 
 fun! GoCoc()
     inoremap <buffer> <silent><expr> <TAB>
@@ -177,8 +189,11 @@ autocmd FileType javascript :call GoYCM()
 autocmd FileType javascript :colorscheme palenight 
 autocmd FileType javascript :syntax on
 
+
+autocmd FileType rust :colorscheme Atelier_CaveDark
 autocmd FileType rust :call GoYCM()
-autocmd FileType rust :colorscheme Atelier_DuneDark
+autocmd FileType rust :call RsPrintln()
+autocmd FileType rust :call RustFmt()
 
 autocmd FileType html :colorscheme palenight 
 autocmd FileType html :syntax on
@@ -191,4 +206,4 @@ autocmd FileType haskell :colorscheme molokai
 
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
-
+let g:rustfmt_on_save = 0
