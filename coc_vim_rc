@@ -1,3 +1,4 @@
+" This build is used especially for javascript, since the completer is good
 " Terminal build: Tilda terminal emulator
 " Tilda color pallete: base16:
 " Link: https://github.com/Gwyki/base16-tilda

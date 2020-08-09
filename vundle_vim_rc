@@ -1,3 +1,4 @@
+" This build is used especially for Rust and Java (although Java is so shit you need an IDE)
 " Terminal build: Tilda terminal emulator
 " Tilda color pallete: base16:
 " Link: https://github.com/Gwyki/base16-tilda
