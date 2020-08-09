@@ -201,9 +201,13 @@ autocmd FileType html :syntax on
 autocmd FileType haskell :syntax on
 autocmd FileType haskell :colorscheme molokai
 
+autocmd FileType java :colorscheme Atelier_CaveDark
+autocmd FileType java :call GoYCM()
+
 " Gruvbox for C/C++ files
 "autocmd FileType cpp,cxx,h,hpp,c :colorscheme gruvbox
 
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:rustfmt_on_save = 0
+
