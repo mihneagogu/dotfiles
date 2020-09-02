@@ -1,4 +1,4 @@
-" This build is used especially for Rust and Java (although Java is so shit you need an IDE)
+" This build is used especially for Rust (although CoC also works well for Rust)
 " Terminal build: Tilda terminal emulator
 " Tilda color pallete: base16:
 " Link: https://github.com/Gwyki/base16-tilda

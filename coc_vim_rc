@@ -1,4 +1,3 @@
-" This build is used especially for javascript, since the completer is good
 " Terminal build: Tilda terminal emulator
 " Tilda color pallete: base16:
 " Link: https://github.com/Gwyki/base16-tilda
@@ -46,9 +45,11 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 
-"set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.vim/plugged')
 
+Plug 'tomasiser/vim-code-dark'
+Plug 'vimoxide/vim-cinnabar'
+Plug 'bignimbus/pop-punk.vim'
 Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
 Plug 'alx741/vim-rustfmt'
 Plug 'dense-analysis/ale'
@@ -80,7 +81,7 @@ Plug 'scrooloose/nerdtree'
 call plug#end() 
 
 
-colorscheme gruvbox 
+colorscheme Atelier_DuneDark
 syntax on
 set background=dark
 
@@ -114,7 +115,9 @@ let g:netrw_winsize = 25
 
 
 let g:ctrlp_use_caching = 0
+ 
 
+nnoremap <Space><Space> <ESC>/<++><Enter>"_c4l
 
 " Enter to add new line, brackets to look for brackets
 map <Enter> o<ESC>
@@ -145,12 +148,6 @@ vnoremap K :m '<-2<CR>gv=gv
 vnoremap <C-p> "+p<CR>
  
 
-fun! GoYCM()
-    nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
-    nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-    nnoremap <buffer> <silent> <leader>rr :YcmCompleter RefactorRename<space>
-endfun
-
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
@@ -162,6 +159,10 @@ endfun
 
 fun! RustFmt()
     nnoremap <leader>rs :Rustfmt<ESC>
+endfun
+
+fun! TSCompile()
+    nnoremap <leader>ts :!tsc<ESC>
 endfun
 
 fun! GoCoc()
@@ -184,32 +185,34 @@ endfun
 
 "autocmd FileType typescript :call GoYCM()
 
-"autocmd FileType cpp,cxx,h,hpp,c :call GoYCM()
+autocmd FileType cpp,cxx,h,hpp,c :colorscheme gruvbox
+autocmd FileType cpp,cxx,h,hpp,c :call GoCoc()
 
 "autocmd FileType javascript :call GoYCM()
 autocmd FileType javascript :colorscheme palenight 
-autocmd FileType javascript :syntax on
-autocmd FileType javascript :call GoCoc()
+autocmd FileType javascript,typescript :syntax on
+autocmd FileType javascript,typescript :call GoCoc()
 
+autocmd FileType typescript,javascript,html :colorscheme pop-punk 
+autocmd FileType typescript :call TSCompile()
 
-autocmd FileType rust :colorscheme Atelier_EstuaryDark
+autocmd FileType vimscript :colorscheme Atelier_DuneDark
+
 autocmd FileType rust :call GoCoc()
 autocmd FileType rust :call RsPrintln()
 autocmd FileType rust :call RustFmt()
 
-autocmd FileType html :colorscheme palenight 
-autocmd FileType html :syntax on
-
 autocmd FileType haskell :syntax on
 autocmd FileType haskell :colorscheme molokai
 
-" Gruvbox for C/C++ files
-"autocmd FileType cpp,cxx,h,hpp,c :colorscheme gruvbox
-autocmd FileType cpp,cxx,h,hpp,c :call GoCoc()
-
-
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:rustfmt_on_save = 0
-highlight CocErrorHighlight ctermfg=Red guifg=#ff0000
-
+" Making automated <tag></tag>s for html documents
+autocmd FileType javascript,typescript,html inoremap ;b <b></b><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;p <p></p><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;h1 <h1></h1><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;h2 <h2></h2><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;h3 <h3></h3><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;bt <button></button><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;d <div></div><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;li <li></li><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;ul <ul></ul><Enter><++><Esc>kf/hi
+autocmd FileType javascript,typescript,html inoremap ;f <form></form><Enter><++><Esc>kf/hi
