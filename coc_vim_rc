@@ -47,6 +47,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasiser/vim-code-dark'
 Plug 'vimoxide/vim-cinnabar'
 Plug 'bignimbus/pop-punk.vim'
@@ -107,6 +108,7 @@ endif
 
 let g:termguicolors=256
 let mapleader = " "
+let g:rustfmt_on_save = 0
 
 let g:netrw_browse_split = 2
 let g:netrw_banner = 0
@@ -183,13 +185,9 @@ fun! GoCoc()
 endfun
 
 
-"autocmd FileType typescript :call GoYCM()
-
-autocmd FileType cpp,cxx,h,hpp,c :colorscheme gruvbox
+" autocmd FileType cpp,cxx,h,hpp,c :colorscheme gruvbox
 autocmd FileType cpp,cxx,h,hpp,c :call GoCoc()
 
-"autocmd FileType javascript :call GoYCM()
-autocmd FileType javascript :colorscheme palenight 
 autocmd FileType javascript,typescript :syntax on
 autocmd FileType javascript,typescript :call GoCoc()
 
@@ -210,9 +208,3 @@ autocmd FileType javascript,typescript,html inoremap ;b <b></b><Enter><++><Esc>k
 autocmd FileType javascript,typescript,html inoremap ;p <p></p><Enter><++><Esc>kf/hi
 autocmd FileType javascript,typescript,html inoremap ;h1 <h1></h1><Enter><++><Esc>kf/hi
 autocmd FileType javascript,typescript,html inoremap ;h2 <h2></h2><Enter><++><Esc>kf/hi
-autocmd FileType javascript,typescript,html inoremap ;h3 <h3></h3><Enter><++><Esc>kf/hi
-autocmd FileType javascript,typescript,html inoremap ;bt <button></button><Enter><++><Esc>kf/hi
-autocmd FileType javascript,typescript,html inoremap ;d <div></div><Enter><++><Esc>kf/hi
-autocmd FileType javascript,typescript,html inoremap ;li <li></li><Enter><++><Esc>kf/hi
-autocmd FileType javascript,typescript,html inoremap ;ul <ul></ul><Enter><++><Esc>kf/hi
-autocmd FileType javascript,typescript,html inoremap ;f <form></form><Enter><++><Esc>kf/hi
